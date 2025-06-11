@@ -114,21 +114,24 @@ let demoProducts = [
     img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80",
     price: 199000,
     status: "Đang bán",
-    category: "Thời trang"
+    category: "Thời trang",
+    desc: "Áo thun cotton thoáng mát, form trẻ trung, dễ phối đồ, phù hợp mọi hoạt động."
   },
   {
     name: "Quần jeans nữ",
     img: "https://images.unsplash.com/photo-1516762689617-f5e6b9cfd2c1?auto=format&fit=crop&w=400&q=80",
     price: 299000,
     status: "Hết hàng",
-    category: "Thời trang"
+    category: "Thời trang",
+    desc: "Quần jeans nữ co giãn, tôn dáng, chất vải bền đẹp, phù hợp mọi phong cách."
   },
   {
     name: "Giày sneaker trắng",
     img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=400&q=80",
     price: 499000,
     status: "Đang bán",
-    category: "Giày dép"
+    category: "Giày dép",
+    desc: "Sneaker trắng trẻ trung, nhẹ, không thấm nước, dễ phối đồ, hot trend năm nay."
   }
 ];
 
@@ -181,12 +184,12 @@ function renderPage(page) {
       </div>
       <div class="shop-products" style="display:flex;gap:20px;margin:30px 0;flex-wrap:wrap;">`;
     demoProducts.forEach((p, idx) => {
-      html += `<div class='product-card'>
+      html += `<div class='product-card' onclick='showProductDetail(${idx})' style='cursor:pointer;'>
         <img src='${p.img}' alt='${p.name}'>
         <h4>${p.name}</h4>
         <div class='price'>${p.price.toLocaleString()}₫</div>
         <div class='status${p.status !== "Đang bán" ? " soldout" : ""}'>${p.status}</div>
-        <button onclick='addToCart(${idx})' ${p.status!=="Đang bán"?"disabled":''}>Mua ngay</button>
+        <button onclick='event.stopPropagation();addToCart(${idx})' ${p.status!=="Đang bán"?"disabled":''}>Mua ngay</button>
       </div>`;
     });
     html += `</div>`;
@@ -260,6 +263,7 @@ function renderPage(page) {
         </tr>`;
       });
       html += `</tbody></table>`;
+      html += `<button class='checkout-btn' onclick='showCheckoutPopup()'>Thanh toán</button>`;
     }
   }
   if(page === 'ai') {
@@ -614,4 +618,42 @@ window.chatbotQuick = function(msg) {
     chatBox.scrollTop = chatBox.scrollHeight;
   }, 600);
   chatBox.scrollTop = chatBox.scrollHeight;
-} 
+}
+
+window.showProductDetail = function(idx) {
+  const p = demoProducts[idx];
+  const popup = document.createElement('div');
+  popup.className = 'product-detail-popup';
+  popup.innerHTML = `<div class='product-detail-inner'><button onclick='this.closest(".product-detail-popup").remove()' style='position:absolute;top:10px;right:16px;background:none;border:none;color:#00fff7;font-size:1.6rem;cursor:pointer;'>×</button><img src='${p.img}' alt='' style='width:100%;max-width:320px;border-radius:14px;box-shadow:0 2px 16px #00fff7cc;margin-bottom:16px;'><h3 style='color:#00fff7;font-family:Orbitron,sans-serif;font-size:1.25rem;'>${p.name}</h3><div class='price' style='font-size:1.15rem;margin-bottom:6px;'>${p.price.toLocaleString()}₫</div><div class='status${p.status!="Đang bán"?" soldout":""}' style='margin-bottom:10px;'>${p.status}</div><div style='color:#ffe53b;font-size:1.08em;margin-bottom:12px;'>${p.desc||"Không có mô tả."}</div><button onclick='addToCart(${idx});this.closest(".product-detail-popup").remove()' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:1.1rem;' ${p.status!=="Đang bán"?"disabled":''}>Mua ngay</button></div>`;
+  Object.assign(popup.style, {position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'});
+  document.body.appendChild(popup);
+}
+
+window.showCheckoutPopup = function() {
+  const popup = document.createElement('div');
+  popup.className = 'checkout-popup';
+  popup.innerHTML = `<div class='checkout-inner'><button onclick='this.closest(".checkout-popup").remove()' style='position:absolute;top:10px;right:16px;background:none;border:none;color:#00fff7;font-size:1.6rem;cursor:pointer;'>×</button><h3 style='color:#00fff7;font-family:Orbitron,sans-serif;font-size:1.18rem;margin-bottom:10px;'>Thanh toán đơn hàng</h3><form id='checkout-form'><label>Họ tên<br><input id='ck-name' type='text' required style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;margin-bottom:8px;'></label><label>Số điện thoại<br><input id='ck-phone' type='tel' required style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;margin-bottom:8px;'></label><label>Địa chỉ nhận hàng<br><input id='ck-address' type='text' required style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;margin-bottom:8px;'></label><label>Phương thức thanh toán<br><select id='ck-method' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;margin-bottom:12px;' onchange='toggleQRBox()'><option value='qr'>Chuyển khoản QR</option><option value='cod'>Ship COD</option></select></label><div id='qr-box' style='margin-bottom:12px;'><img src='https://img.vietqr.io/image/970422-123456789-compact2.png?amount=0&addInfo=ShopLao' alt='QR code' style='width:160px;display:block;margin:0 auto 6px auto;border-radius:10px;box-shadow:0 2px 12px #00fff7cc;'><div style='color:#ffe53b;font-size:0.98em;'>Quét mã QR để thanh toán</div></div><button type='submit' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:1.1rem;width:100%;margin-top:8px;'>Xác nhận thanh toán</button></form></div>`;
+  Object.assign(popup.style, {position:'fixed',top:0,left:0,right:0,bottom:0,background:'rgba(0,0,0,0.45)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center'});
+  document.body.appendChild(popup);
+}
+
+window.toggleQRBox = function() {
+  const val = document.getElementById('ck-method').value;
+  document.getElementById('qr-box').style.display = val==='qr'?'block':'none';
+}
+
+document.body.addEventListener('submit', function(e) {
+  if(e.target && e.target.id==='checkout-form') {
+    e.preventDefault();
+    const name = document.getElementById('ck-name').value.trim();
+    const phone = document.getElementById('ck-phone').value.trim();
+    const address = document.getElementById('ck-address').value.trim();
+    const method = document.getElementById('ck-method').value;
+    if(method==='qr') {
+      alert('Cảm ơn bạn đã thanh toán qua QR! Đơn hàng sẽ được xử lý.');
+    } else {
+      alert('Đơn hàng sẽ được giao và thu tiền tận nơi (COD).');
+    }
+    document.querySelector('.checkout-popup').remove();
+  }
+}); 
