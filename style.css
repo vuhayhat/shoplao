@@ -1,22 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@400;600;700&display=swap');
+
 body {
-    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #e0e7ff 0%, #fff0f6 100%);
-    color: #222;
+    background: linear-gradient(135deg, #18122B 0%, #2D3250 100%);
+    color: #fff;
     min-height: 100vh;
+    letter-spacing: 0.01em;
 }
 header {
-    background: linear-gradient(90deg, #1e90ff 0%, #ff6ec4 100%);
+    background: linear-gradient(90deg, #0f2027 0%, #2c5364 100%);
     color: #fff;
-    padding: 28px 0 16px 0;
+    padding: 32px 0 18px 0;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 24px #1e90ff22;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
+    box-shadow: 0 4px 32px #00fff7cc, 0 2px 12px #ff00cc55;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
     animation: fadeInDown 1s;
 }
 @keyframes fadeInDown {
@@ -24,13 +27,15 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 header h1 {
-    margin: 0 0 14px 0;
-    font-size: 2.3rem;
-    letter-spacing: 1px;
-    font-weight: 800;
-    background: linear-gradient(90deg, #1e90ff, #ff6ec4, #42e695);
+    margin: 0 0 16px 0;
+    font-size: 2.5rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 900;
+    background: linear-gradient(90deg, #00fff7, #ff00cc, #ffe53b, #1e90ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 12px #00fff7, 0 0 24px #ff00cc99;
+    letter-spacing: 2px;
 }
 nav ul {
     list-style: none;
@@ -38,57 +43,60 @@ nav ul {
     margin: 0 0 10px 0;
     display: flex;
     justify-content: center;
-    gap: 24px;
+    gap: 28px;
 }
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-weight: 600;
-    padding: 10px 22px;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #42e695 0%, #3bb2b8 100%);
-    box-shadow: 0 2px 8px #1e90ff22;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
+    box-shadow: 0 2px 12px #00fff799, 0 0px 8px #ff00cc55;
     transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    font-size: 1.08rem;
+    font-size: 1.12rem;
     position: relative;
     overflow: hidden;
+    text-shadow: 0 0 8px #00fff7cc;
 }
 nav ul li a:hover {
-    background: linear-gradient(90deg, #ff6ec4 0%, #1e90ff 100%);
+    background: linear-gradient(90deg, #ffe53b 0%, #ff00cc 100%);
     color: #fff;
-    transform: scale(1.08);
-    box-shadow: 0 4px 16px #ff6ec433;
+    transform: scale(1.10);
+    box-shadow: 0 4px 24px #ff00cc99, 0 0 16px #ffe53b99;
 }
 .lang-switcher {
     margin-bottom: 10px;
 }
 .lang-switcher button {
-    background: linear-gradient(135deg, #fff, #e3eafc);
-    color: #1e90ff;
+    background: linear-gradient(135deg, #232526, #ff00cc);
+    color: #00fff7;
     border: none;
     border-radius: 50%;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     font-size: 1.2rem;
     margin: 0 4px;
     cursor: pointer;
-    box-shadow: 0 2px 8px #1e90ff11;
+    box-shadow: 0 2px 12px #00fff799;
     transition: background 0.2s, color 0.2s, transform 0.2s;
+    text-shadow: 0 0 8px #00fff7cc;
 }
 .lang-switcher button:hover {
-    background: linear-gradient(135deg, #ff6ec4, #1e90ff);
+    background: linear-gradient(135deg, #ffe53b, #ff00cc);
     color: #fff;
-    border: 1px solid #fff;
-    transform: scale(1.1);
+    border: 1.5px solid #fff;
+    transform: scale(1.13);
 }
 main {
-    max-width: 1000px;
-    margin: 36px auto 24px auto;
-    background: rgba(255,255,255,0.85);
-    border-radius: 18px;
-    box-shadow: 0 4px 32px #1e90ff11;
-    padding: 40px 28px;
-    min-height: 480px;
+    max-width: 1100px;
+    margin: 40px auto 28px auto;
+    background: rgba(24,18,43,0.92);
+    border-radius: 24px;
+    box-shadow: 0 8px 48px #00fff722, 0 2px 12px #ff00cc33;
+    padding: 48px 32px;
+    min-height: 520px;
     animation: fadeIn 0.8s;
 }
 @keyframes fadeIn {
@@ -97,127 +105,138 @@ main {
 }
 footer {
     text-align: center;
-    padding: 20px 0;
-    background: linear-gradient(90deg, #1e90ff 0%, #ff6ec4 100%);
+    padding: 24px 0;
+    background: linear-gradient(90deg, #232526 0%, #ff00cc 100%);
     color: #fff;
-    font-size: 1.08rem;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    margin-top: 40px;
-    box-shadow: 0 -2px 12px #1e90ff22;
+    font-size: 1.12rem;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    margin-top: 48px;
+    box-shadow: 0 -2px 24px #ff00cc55;
+    text-shadow: 0 0 8px #00fff7cc;
 }
 .product-card {
     background: linear-gradient(135deg, #232526 0%, #414345 100%);
-    border-radius: 18px;
-    box-shadow: 0 0 16px #1e90ff55, 0 4px 32px #ff6ec433;
-    padding: 18px 12px 22px 12px;
+    border-radius: 22px;
+    box-shadow: 0 0 24px #00fff7cc, 0 8px 40px #ff00cc99;
+    padding: 22px 14px 26px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: box-shadow 0.3s, transform 0.2s;
-    border: 2.5px solid transparent;
+    transition: box-shadow 0.3s, transform 0.2s, border 0.2s;
+    border: 3px solid #ff00cc;
     position: relative;
     overflow: hidden;
+    min-width: 220px;
+    max-width: 240px;
+    margin-bottom: 18px;
 }
 .product-card:hover {
-    box-shadow: 0 0 32px #42e695cc, 0 8px 40px #ff6ec4cc;
-    border: 2.5px solid #42e695;
-    transform: scale(1.06) rotate(-2deg);
+    box-shadow: 0 0 48px #00fff7cc, 0 12px 60px #ff00cccc;
+    border: 3px solid #ffe53b;
+    transform: scale(1.08) rotate(-2deg);
+    z-index: 2;
 }
 .product-card img {
     width: 100%;
-    height: 140px;
+    height: 150px;
     object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 0 16px #1e90ff55;
-    margin-bottom: 10px;
+    border-radius: 16px;
+    box-shadow: 0 0 24px #00fff7cc;
+    margin-bottom: 12px;
     background: #fff;
 }
 .product-card h4 {
-    margin: 10px 0 4px 0;
-    font-size: 1.18rem;
-    font-weight: 800;
-    background: linear-gradient(90deg, #42e695, #ff6ec4, #1e90ff);
+    margin: 12px 0 6px 0;
+    font-size: 1.22rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 900;
+    background: linear-gradient(90deg, #ffe53b, #ff00cc, #00fff7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 8px #00fff7cc, 0 0 16px #ff00cc99;
 }
 .product-card .price {
-    color: #1e90ff;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-    text-shadow: 0 0 8px #42e69588;
+    color: #00fff7;
+    font-size: 1.18rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    text-shadow: 0 0 12px #00fff7cc;
 }
 .product-card .status {
-    font-size: 1.05em;
+    font-size: 1.08em;
     margin: 4px 0;
-    font-weight: 600;
+    font-weight: 700;
+    color: #ffe53b;
+    text-shadow: 0 0 8px #ff00cc99;
 }
 .product-card .status.soldout {
     color: #ff3b6a;
-    text-shadow: 0 0 8px #ff6ec4aa;
+    text-shadow: 0 0 12px #ff00cccc;
 }
 .product-card button {
-    margin-top: 10px;
-    padding: 8px 22px;
-    background: linear-gradient(90deg, #1e90ff 0%, #ff6ec4 100%);
+    margin-top: 12px;
+    padding: 10px 28px;
+    background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
     color: #fff;
     border: none;
-    border-radius: 7px;
-    font-weight: 700;
-    font-size: 1.08rem;
+    border-radius: 9px;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 1.12rem;
     cursor: pointer;
-    box-shadow: 0 0 12px #1e90ff55;
+    box-shadow: 0 0 16px #00fff7cc;
     transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    text-shadow: 0 0 8px #ff00cc99;
 }
 .product-card button:hover {
-    background: linear-gradient(90deg, #ff6ec4 0%, #42e695 100%);
-    box-shadow: 0 0 24px #ff6ec4cc;
-    transform: scale(1.08);
+    background: linear-gradient(90deg, #ffe53b 0%, #ff00cc 100%);
+    box-shadow: 0 0 32px #ff00cccc;
+    transform: scale(1.10);
 }
 .shop-banner {
     margin-bottom: 0;
     position: relative;
-    height: 180px;
-    border-radius: 18px;
+    height: 200px;
+    border-radius: 24px;
     overflow: hidden;
-    background: linear-gradient(90deg, #1e90ff 0%, #ff6ec4 100%);
-    box-shadow: 0 4px 24px #1e90ff22;
+    background: linear-gradient(90deg, #0f2027 0%, #ff00cc 100%);
+    box-shadow: 0 4px 32px #ff00cc99, 0 2px 12px #00fff755;
 }
 .shop-banner::after {
     content: '';
     position: absolute;
     left: 0; top: 0; right: 0; bottom: 0;
-    background: linear-gradient(120deg, #1e90ff88 0%, #ff6ec488 100%);
+    background: linear-gradient(120deg, #00fff788 0%, #ff00cc88 100%);
     mix-blend-mode: screen;
     pointer-events: none;
 }
 .shop-profile {
-    background: rgba(255,255,255,0.7);
-    box-shadow: 0 4px 24px #1e90ff22;
-    padding: 22px 38px;
-    border-radius: 22px;
-    margin-bottom: 22px;
-    margin-top: -70px;
+    background: rgba(24,18,43,0.85);
+    box-shadow: 0 4px 32px #00fff722, 0 2px 12px #ff00cc33;
+    padding: 28px 48px;
+    border-radius: 28px;
+    margin-bottom: 28px;
+    margin-top: -90px;
     display: flex;
     align-items: center;
-    gap: 36px;
-    backdrop-filter: blur(10px);
-    border: 2px solid #e3eafc;
+    gap: 44px;
+    backdrop-filter: blur(14px);
+    border: 2.5px solid #ff00cc;
     position: relative;
     z-index: 2;
     animation: fadeInDown 1s;
 }
 .shop-avatar {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    border: 6px solid transparent;
-    background: linear-gradient(135deg, #ff6ec4, #7873f5, #1e90ff, #42e695, #ff6ec4);
+    border: 7px solid #00fff7;
+    background: linear-gradient(135deg, #ff00cc, #ffe53b, #00fff7, #1e90ff, #ff00cc);
     background-size: 200% 200%;
     animation: avatar-gradient 3s ease-in-out infinite alternate;
-    box-shadow: 0 4px 24px #1e90ff33, 0 1.5px 8px #ff6ec433;
+    box-shadow: 0 4px 32px #ff00cc99, 0 1.5px 12px #00fff755;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -237,219 +256,249 @@ footer {
     100% { background-position: 100% 50%; }
 }
 .shop-avatar:hover {
-    box-shadow: 0 8px 32px #ff6ec488, 0 2px 12px #1e90ff55;
-    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 0 8px 48px #ff00cccc, 0 2px 16px #00fff7cc;
+    transform: scale(1.12) rotate(-2deg);
 }
 .shop-profile h3 {
-    font-size: 1.7rem;
-    color: #1e90ff;
+    font-size: 1.8rem;
+    color: #00fff7;
     margin-bottom: 4px;
-    font-weight: 800;
-    letter-spacing: 1px;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px #ff00cc99;
 }
 .shop-profile p {
-    color: #ff6ec4;
-    font-weight: 700;
+    color: #ffe53b;
+    font-weight: 800;
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1.18rem;
+    text-shadow: 0 0 8px #ff00cc99;
 }
 .shop-products {
-    margin-bottom: 24px;
+    margin-bottom: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: flex-start;
 }
 .shop-register-form {
-    max-width: 440px;
-    margin: 36px auto 0 auto;
-    background: rgba(255,255,255,0.85);
-    border-radius: 16px;
-    box-shadow: 0 4px 24px #1e90ff11;
-    padding: 32px 28px 24px 28px;
+    max-width: 480px;
+    margin: 44px auto 0 auto;
+    background: rgba(24,18,43,0.92);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px #00fff722, 0 2px 12px #ff00cc33;
+    padding: 38px 32px 28px 32px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 22px;
     animation: fadeIn 0.8s;
+    border: 2.5px solid #ff00cc;
 }
 .shop-register-form label {
-    font-weight: 600;
-    color: #1e90ff;
+    font-weight: 700;
+    color: #00fff7;
     margin-bottom: 4px;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    font-family: 'Orbitron', Arial, sans-serif;
+    letter-spacing: 1px;
 }
 .shop-register-form input[type="text"],
 .shop-register-form input[type="file"],
 .shop-register-form textarea {
-    padding: 10px 12px;
-    border: 1.5px solid #b3c6e7;
-    border-radius: 7px;
-    font-size: 1.08rem;
-    background: #fff;
+    padding: 12px 14px;
+    border: 2px solid #ff00cc;
+    border-radius: 9px;
+    font-size: 1.12rem;
+    background: #232526;
     margin-top: 2px;
     margin-bottom: 6px;
     resize: vertical;
-    box-shadow: 0 1px 4px #1e90ff11;
+    color: #fff;
+    box-shadow: 0 1px 8px #00fff722;
     transition: border 0.2s, box-shadow 0.2s;
 }
 .shop-register-form input[type="text"]:focus,
 .shop-register-form textarea:focus {
-    border: 1.5px solid #1e90ff;
-    box-shadow: 0 2px 8px #1e90ff22;
+    border: 2px solid #00fff7;
+    box-shadow: 0 2px 12px #00fff7cc;
     outline: none;
 }
 .shop-register-form textarea {
-    min-height: 60px;
-    max-height: 180px;
+    min-height: 70px;
+    max-height: 200px;
 }
 .shop-register-form button[type="submit"] {
-    background: linear-gradient(90deg, #1e90ff 0%, #ff6ec4 100%);
+    background: linear-gradient(90deg, #ff00cc 0%, #00fff7 100%);
     color: #fff;
     border: none;
-    border-radius: 7px;
-    padding: 12px 0;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-top: 12px;
+    border-radius: 9px;
+    padding: 14px 0;
+    font-size: 1.18rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 900;
+    margin-top: 14px;
     cursor: pointer;
-    box-shadow: 0 2px 8px #1e90ff22;
+    box-shadow: 0 2px 12px #00fff799;
     transition: background 0.2s, transform 0.2s;
     position: relative;
     overflow: hidden;
+    text-shadow: 0 0 8px #ff00cc99;
 }
 .shop-register-form button[type="submit"]:hover {
-    background: linear-gradient(90deg, #ff6ec4 0%, #1e90ff 100%);
-    transform: scale(1.04);
+    background: linear-gradient(90deg, #ffe53b 0%, #ff00cc 100%);
+    transform: scale(1.06);
 }
 .statistic-box {
-    background: rgba(255,255,255,0.85);
-    border-radius: 14px;
-    box-shadow: 0 2px 12px #1e90ff18;
-    padding: 32px 24px 18px 24px;
-    margin-bottom: 32px;
+    background: rgba(24,18,43,0.92);
+    border-radius: 18px;
+    box-shadow: 0 2px 24px #00fff722, 0 2px 12px #ff00cc33;
+    padding: 38px 28px 22px 28px;
+    margin-bottom: 38px;
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 38px;
     justify-content: space-between;
     animation: fadeIn 0.8s;
+    border: 2.5px solid #ff00cc;
 }
 .statistic-item {
-    flex: 1 1 180px;
-    min-width: 180px;
-    background: linear-gradient(135deg, #fff, #e3eafc 80%);
-    border-radius: 12px;
-    box-shadow: 0 1px 4px #1e90ff11;
-    padding: 22px 16px;
+    flex: 1 1 200px;
+    min-width: 200px;
+    background: linear-gradient(135deg, #232526, #2D3250 80%);
+    border-radius: 14px;
+    box-shadow: 0 1px 8px #00fff722;
+    padding: 28px 18px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 18px;
     margin-bottom: 10px;
     transition: box-shadow 0.2s, transform 0.2s;
+    border: 2px solid #00fff7;
 }
 .statistic-item:hover {
-    box-shadow: 0 4px 16px #ff6ec433;
-    transform: scale(1.04);
+    box-shadow: 0 4px 24px #ff00cc99;
+    transform: scale(1.06);
 }
 .statistic-item .icon {
-    font-size: 2.2rem;
-    color: #1e90ff;
-    background: #e3eafc;
+    font-size: 2.4rem;
+    color: #ffe53b;
+    background: #ff00cc33;
     border-radius: 50%;
-    width: 48px;
-    height: 48px;
+    width: 54px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 0 16px #00fff7cc;
 }
 .statistic-item .value {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #222;
+    font-size: 2.2rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 900;
+    color: #00fff7;
+    text-shadow: 0 0 12px #ff00cc99;
 }
 .statistic-item .label {
-    font-size: 1.08rem;
-    color: #1e90ff;
+    font-size: 1.12rem;
+    color: #ffe53b;
+    font-family: 'Orbitron', Arial, sans-serif;
+    text-shadow: 0 0 8px #ff00cc99;
 }
 table.order-table {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(135deg, #fff, #e3eafc 80%);
-    box-shadow: 0 2px 8px #1e90ff11;
-    margin-bottom: 24px;
+    background: linear-gradient(135deg, #232526, #2D3250 80%);
+    box-shadow: 0 2px 12px #00fff722;
+    margin-bottom: 28px;
     animation: fadeIn 0.8s;
+    border: 2px solid #ff00cc;
 }
 thead th, tbody td {
-    padding: 14px 10px;
+    padding: 16px 12px;
     text-align: left;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-size: 1.08rem;
+    color: #ffe53b;
+    text-shadow: 0 0 8px #ff00cc99;
 }
 thead th {
-    font-weight: 700;
-    color: #1e90ff;
-    background: #e3eafc;
-    font-size: 1.08rem;
+    font-weight: 900;
+    background: #18122B;
 }
 tbody tr {
     transition: background 0.15s;
     cursor: pointer;
 }
 tbody tr:hover {
-    background: #f1f7ff;
+    background: #2D3250;
 }
 .status-paid {
-    color: #43a047;
+    color: #00fff7;
     font-weight: bold;
+    text-shadow: 0 0 8px #00fff7cc;
 }
 .status-pending {
-    color: #ff9800;
+    color: #ffe53b;
     font-weight: bold;
+    text-shadow: 0 0 8px #ffe53bcc;
 }
 .status-cancel {
-    color: #e53935;
+    color: #ff3b6a;
     font-weight: bold;
+    text-shadow: 0 0 8px #ff00cccc;
 }
 .customer-list, .bestseller-list {
     display: flex;
-    gap: 18px;
+    gap: 22px;
     flex-wrap: wrap;
-    margin-top: 12px;
+    margin-top: 16px;
 }
 .customer-card, .bestseller-card {
-    background: linear-gradient(135deg, #fff, #e3eafc 80%);
-    border-radius: 10px;
-    box-shadow: 0 1px 4px #1e90ff11;
-    padding: 16px 20px;
-    min-width: 160px;
-    flex: 1 1 160px;
+    background: linear-gradient(135deg, #232526, #2D3250 80%);
+    border-radius: 12px;
+    box-shadow: 0 1px 8px #00fff722;
+    padding: 18px 24px;
+    min-width: 180px;
+    flex: 1 1 180px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
-    font-size: 1.08rem;
+    gap: 8px;
+    font-size: 1.12rem;
     transition: box-shadow 0.2s, transform 0.2s;
+    border: 2px solid #00fff7;
+    color: #fff;
+    text-shadow: 0 0 8px #ff00cc99;
 }
 .customer-card:hover, .bestseller-card:hover {
-    box-shadow: 0 4px 16px #ff6ec433;
-    transform: scale(1.04);
+    box-shadow: 0 4px 24px #ff00cc99;
+    transform: scale(1.06);
 }
 .customer-card .icon, .bestseller-card .icon {
-    font-size: 1.5rem;
-    color: #1e90ff;
+    font-size: 1.7rem;
+    color: #ffe53b;
     margin-bottom: 4px;
+    text-shadow: 0 0 8px #ff00cc99;
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     main {
         padding: 16px 6px;
     }
     nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
     }
     header h1 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
     .shop-profile {
         flex-direction: column;
-        gap: 12px;
-        padding: 16px 8px;
+        gap: 16px;
+        padding: 18px 8px;
     }
     .statistic-box {
         flex-direction: column;
@@ -457,26 +506,35 @@ tbody tr:hover {
     }
     .customer-list, .bestseller-list {
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
+    }
+    .product-card {
+        min-width: 90vw;
+        max-width: 98vw;
     }
 }
 .order-detail {
-    background: linear-gradient(135deg, #fff, #e3eafc 80%);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px #1e90ff11;
-    padding: 32px 22px;
-    margin-top: 28px;
-    max-width: 520px;
+    background: linear-gradient(135deg, #232526, #2D3250 80%);
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #00fff722;
+    padding: 38px 26px;
+    margin-top: 32px;
+    max-width: 540px;
     margin-left: auto;
     margin-right: auto;
     animation: fadeIn 0.8s;
+    border: 2px solid #ff00cc;
+    color: #fff;
+    text-shadow: 0 0 8px #00fff7cc;
 }
 .order-detail h2 {
-    color: #1e90ff;
-    margin-bottom: 18px;
-    font-size: 1.3rem;
-    font-weight: 700;
+    color: #00fff7;
+    margin-bottom: 22px;
+    font-size: 1.4rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    font-weight: 900;
+    text-shadow: 0 0 12px #ff00cc99;
 }
 .order-detail ul {
-    padding-left: 18px;
+    padding-left: 22px;
 } 
