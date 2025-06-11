@@ -59,7 +59,7 @@ nav ul li {
 }
 nav ul li a {
     width: 90%;
-    margin: 8px 0;
+    margin: 12px 8px;
     display: block;
     color: #fff;
     text-decoration: none;
@@ -523,7 +523,7 @@ tbody tr:hover {
     }
     nav ul li a {
         width: 94%;
-        margin: 6px 0;
+        margin: 10px 4px;
         font-size: 0.98rem;
         padding: 10px 0;
         border-radius: 8px;
@@ -655,4 +655,70 @@ tbody tr:hover {
 }
 .order-detail ul {
     padding-left: 22px;
+}
+.fb-popup {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fb-popup-inner {
+    background: linear-gradient(135deg, #232526 0%, #2D3250 100%);
+    border-radius: 18px;
+    box-shadow: 0 0 32px #00fff7cc, 0 8px 40px #ff00cc99;
+    padding: 38px 32px 28px 32px;
+    min-width: 320px;
+    max-width: 94vw;
+    color: #fff;
+    text-align: center;
+    animation: fadeIn 0.4s;
+    border: 2.5px solid #ff00cc;
+}
+.fb-popup-inner h3 {
+    color: #00fff7;
+    font-family: 'Orbitron', 'Poppins', 'Segoe UI', Arial, Tahoma, sans-serif;
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+    text-shadow: 0 0 12px #ff00cc99;
+}
+.gemini-content-box {
+    background: linear-gradient(135deg, #232526 0%, #2D3250 100%);
+    border-radius: 18px;
+    box-shadow: 0 0 32px #00fff7cc, 0 8px 40px #ff00cc99;
+    padding: 38px 32px 28px 32px;
+    max-width: 600px;
+    margin: 32px auto 0 auto;
+    color: #fff;
+    animation: fadeIn 0.8s;
+    border: 2.5px solid #ff00cc;
+}
+.gemini-output {
+    background: #18122B;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #00fff799;
+    padding: 18px 14px 10px 14px;
+    margin: 18px 0 0 0;
+}
+.gemini-output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    color: #00fff7;
+    margin-bottom: 6px;
+    font-size: 1.08em;
+}
+@media (max-width: 900px) {
+    .gemini-content-box {
+        padding: 16px 4vw 12px 4vw;
+        border-radius: 10px;
+        max-width: 98vw;
+    }
+    .gemini-output {
+        padding: 10px 4vw 6px 4vw;
+        border-radius: 8px;
+    }
 } 

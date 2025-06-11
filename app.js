@@ -27,6 +27,10 @@ const translations = {
     statistic: {
       title: "Thống kê tổng quan",
       desc: "Xem tổng số đơn, sản phẩm đã bán, thu nhập, khách hàng và sản phẩm bán chạy."
+    },
+    fbpost: {
+      title: "Đăng bài Facebook tự động",
+      desc: "Tạo nội dung quảng bá sản phẩm và hướng dẫn đăng Facebook."
     }
   },
   en: {
@@ -57,6 +61,10 @@ const translations = {
     statistic: {
       title: "Statistics Overview",
       desc: "View total orders, sold products, income, customers, and best-selling products."
+    },
+    fbpost: {
+      title: "Auto Facebook Post",
+      desc: "Generate product promotion content and Facebook posting guide."
     }
   },
   lo: {
@@ -87,6 +95,10 @@ const translations = {
     statistic: {
       title: "ສະຖິຕິພາບລວມ",
       desc: "ເບິ່ງຈຳນວນຄຳສັ່ງ, ສິນຄ້າທີ່ຂາຍໄດ້, ລາຍຮັບ, ລູກຄ້າ ແລະສິນຄ້າຂາຍດີ."
+    },
+    fbpost: {
+      title: "ໂພສຕ໌ເຟສບຸກອັດຕະໂນມັດ",
+      desc: "ສ້າງເນື້ອຫາໂຄສະນາສິນຄ້າ ແລະ ແນະນຳການໂພສຕ໌ເຟສບຸກ."
     }
   }
 };
@@ -292,6 +304,25 @@ function renderPage(page) {
     html += `</div></div>
     </div>`;
   }
+  if(page === 'fbpost') {
+    html += `<div class='gemini-content-box'>
+      <h3 style='font-family:Orbitron,Arial,sans-serif;font-size:1.3rem;color:#00fff7;text-shadow:0 0 8px #ff00cc;'>🧠 Gợi ý nội dung tự động từ Gemini</h3>
+      <form id='gemini-form' style='margin:18px 0 12px 0;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;'>
+        <div><label>Tên sản phẩm<br><input id='gsp-name' type='text' placeholder='Áo thun nữ siêu mềm' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;min-width:180px;'></label></div>
+        <div><label>Mô tả nổi bật<br><input id='gsp-desc' type='text' placeholder='Vải mịn, co giãn, trendy...' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;min-width:180px;'></label></div>
+        <div><label>Giá<br><input id='gsp-price' type='text' placeholder='199.000đ' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;min-width:100px;'></label></div>
+        <button type='submit' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:1.1rem;'>Tạo nội dung</button>
+      </form>
+      <div id='gemini-output-box'></div>
+      <div class='fb-guide' style='margin-top:24px;background:#18122B;padding:16px 18px;border-radius:10px;color:#ffe53b;'>
+        <b>Hướng dẫn đăng Facebook:</b> <br>
+        1. Nhấn <b>Sao chép</b> nội dung gợi ý bên dưới.<br>
+        2. Dán vào Facebook cá nhân hoặc Fanpage.<br>
+        3. (Nâng cao) Có thể tích hợp Facebook API để tự động đăng bài.<br>
+        <span style='color:#00fff7;font-size:0.98em;'>* Để tự động đăng cần token Fanpage, quyền pages_manage_posts, xác thực OAuth.</span>
+      </div>
+    </div>`;
+  }
   document.getElementById('main-content').innerHTML = html;
 }
 
@@ -323,7 +354,29 @@ function showOrderDetail(orderId) {
 // Khởi tạo trang đầu tiên
 document.addEventListener('DOMContentLoaded', () => {
   renderPage(currentPage);
+  const fbBtn = document.getElementById('fb-post-btn');
+  if(fbBtn) fbBtn.onclick = function(e) {
+    e.preventDefault();
+    navigate('fbpost');
+  };
+  document.body.addEventListener('submit', function(e) {
+    if(e.target && e.target.id==='gemini-form') {
+      e.preventDefault();
+      const name = document.getElementById('gsp-name').value.trim()||'Áo thun nữ siêu mềm';
+      const desc = document.getElementById('gsp-desc').value.trim()||'Vải mịn, co giãn, trendy';
+      const price = document.getElementById('gsp-price').value.trim()||'199.000đ';
+      const hashtags = '#ThoiTrangNu #SaleHe #AoThunDep';
+      const content = `🌟 ${name.toUpperCase()} 🌟\n${desc}\n✅ Co giãn thoái mái\n✅ Dễ phối đồ\n✅ Màu sắc trendy\n👉 Đặt hàng ngay kẻo hết: [link]\nGiá chỉ ${price}!\n${hashtags}`;
+      document.getElementById('gemini-output-box').innerHTML = `<div class='gemini-output'><div class='gemini-output-header'><span>Output AI gợi ý:</span> <button onclick='copyGeminiContent()' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:6px 18px;border-radius:7px;cursor:pointer;'>Sao chép</button></div><pre id='gemini-content' style='background:#232526;color:#ffe53b;padding:16px 14px;border-radius:8px;font-size:1.08em;margin:0 0 8px 0;white-space:pre-line;'>${content}</pre></div>`;
+    }
+  });
 });
+
+window.copyGeminiContent = function() {
+  const text = document.getElementById('gemini-content').innerText;
+  navigator.clipboard.writeText(text);
+  alert('Đã sao chép nội dung!');
+}
 
 window.renderAIResult = function(type) {
   let html = '';
