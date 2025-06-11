@@ -308,17 +308,35 @@ function renderPage(page) {
     html += `<div class='gemini-content-box'>
       <h3 style='font-family:Orbitron,Arial,sans-serif;font-size:1.3rem;color:#00fff7;text-shadow:0 0 8px #ff00cc;'>🧠 Gợi ý nội dung tự động từ Gemini</h3>
       <form id='gemini-form' style='margin:18px 0 12px 0;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;'>
-        <div><label>Tên sản phẩm<br><input id='gsp-name' type='text' placeholder='Áo thun nữ siêu mềm' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;min-width:180px;'></label></div>
-        <div><label>Mô tả nổi bật<br><input id='gsp-desc' type='text' placeholder='Vải mịn, co giãn, trendy...' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;min-width:180px;'></label></div>
-        <div><label>Giá<br><input id='gsp-price' type='text' placeholder='199.000đ' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;min-width:100px;'></label></div>
-        <button type='submit' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:1.1rem;'>Tạo nội dung</button>
+        <div style='flex:1 1 220px;min-width:180px;'><label>Tên sản phẩm<br><input id='gsp-name' type='text' placeholder='Áo thun nữ siêu mềm' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'></label></div>
+        <div style='flex:1 1 220px;min-width:180px;'><label>Mô tả nổi bật<br><input id='gsp-desc' type='text' placeholder='Vải mịn, co giãn, trendy...' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'></label></div>
+        <div style='flex:1 1 120px;min-width:100px;'><label>Giá<br><input id='gsp-price' type='text' placeholder='199.000đ' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'></label></div>
+        <div style='flex:1 1 220px;min-width:180px;'><label>Link ảnh sản phẩm<br><input id='gsp-img' type='text' placeholder='https://...' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'></label></div>
+        <div style='flex:1 1 220px;min-width:180px;'><label>Link sản phẩm<br><input id='gsp-link' type='text' placeholder='https://...' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'></label></div>
+        <div style='flex:1 1 220px;min-width:180px;'><label>Nơi đăng<br>
+          <select id='gsp-place' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;' onchange='toggleGroupInput()'>
+            <option value='personal'>Tài khoản cá nhân</option>
+            <option value='fanpage'>Fanpage</option>
+            <option value='group'>Nhóm Facebook</option>
+            <option value='multi-group'>Nhiều nhóm</option>
+          </select>
+        </label></div>
+        <div id='group-input-box' style='display:none;flex:1 1 220px;min-width:180px;'><label>Nhập ID nhóm (cách nhau dấu phẩy)<br><input id='gsp-groups' type='text' placeholder='group1,group2,...' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'></label></div>
+        <div style='flex:1 1 180px;min-width:140px;'><label>Chế độ đăng<br>
+          <select id='gsp-mode' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;' onchange='toggleScheduleInput()'>
+            <option value='now'>Đăng ngay</option>
+            <option value='schedule'>Lên lịch</option>
+          </select>
+        </label></div>
+        <div id='schedule-input-box' style='display:none;flex:1 1 220px;min-width:180px;'><label>Ngày giờ đăng<br><input id='gsp-datetime' type='datetime-local' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'></label><br><label>Lặp lại định kỳ<br><select id='gsp-repeat' style='padding:8px 14px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;width:100%;'><option value='none'>Không lặp</option><option value='daily'>Hàng ngày</option><option value='weekly'>Hàng tuần</option></select></label></div>
+        <button type='submit' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:1.1rem;flex:1 1 100px;min-width:120px;'>Tạo nội dung</button>
       </form>
       <div id='gemini-output-box'></div>
       <div class='fb-guide' style='margin-top:24px;background:#18122B;padding:16px 18px;border-radius:10px;color:#ffe53b;'>
         <b>Hướng dẫn đăng Facebook:</b> <br>
-        1. Nhấn <b>Sao chép</b> nội dung gợi ý bên dưới.<br>
-        2. Dán vào Facebook cá nhân hoặc Fanpage.<br>
-        3. (Nâng cao) Có thể tích hợp Facebook API để tự động đăng bài.<br>
+        1. Nhấn <b>Sao chép</b> hoặc <b>Đăng tự động</b> nội dung gợi ý bên dưới.<br>
+        2. Nếu đăng tự động, bạn cần xác thực Facebook và cấp quyền.<br>
+        3. Có thể chọn đăng lên nhiều nhóm, fanpage, lên lịch định kỳ.<br>
         <span style='color:#00fff7;font-size:0.98em;'>* Để tự động đăng cần token Fanpage, quyền pages_manage_posts, xác thực OAuth.</span>
       </div>
     </div>`;
@@ -365,9 +383,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = document.getElementById('gsp-name').value.trim()||'Áo thun nữ siêu mềm';
       const desc = document.getElementById('gsp-desc').value.trim()||'Vải mịn, co giãn, trendy';
       const price = document.getElementById('gsp-price').value.trim()||'199.000đ';
+      const img = document.getElementById('gsp-img').value.trim();
+      const link = document.getElementById('gsp-link').value.trim();
+      const place = document.getElementById('gsp-place').value;
+      const groups = (document.getElementById('gsp-groups')||{}).value||'';
+      const mode = document.getElementById('gsp-mode').value;
+      const datetime = (document.getElementById('gsp-datetime')||{}).value||'';
+      const repeat = (document.getElementById('gsp-repeat')||{}).value||'none';
       const hashtags = '#ThoiTrangNu #SaleHe #AoThunDep';
-      const content = `🌟 ${name.toUpperCase()} 🌟\n${desc}\n✅ Co giãn thoái mái\n✅ Dễ phối đồ\n✅ Màu sắc trendy\n👉 Đặt hàng ngay kẻo hết: [link]\nGiá chỉ ${price}!\n${hashtags}`;
-      document.getElementById('gemini-output-box').innerHTML = `<div class='gemini-output'><div class='gemini-output-header'><span>Output AI gợi ý:</span> <button onclick='copyGeminiContent()' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:6px 18px;border-radius:7px;cursor:pointer;'>Sao chép</button></div><pre id='gemini-content' style='background:#232526;color:#ffe53b;padding:16px 14px;border-radius:8px;font-size:1.08em;margin:0 0 8px 0;white-space:pre-line;'>${content}</pre></div>`;
+      let content = `🌟 ${name.toUpperCase()} 🌟\n${desc}\n✅ Co giãn thoải mái\n✅ Dễ phối đồ\n✅ Màu sắc trendy`;
+      if(link) content += `\n👉 Đặt hàng ngay kẻo hết: ${link}`;
+      if(price) content += `\nGiá chỉ ${price}!`;
+      content += `\n${hashtags}`;
+      let imgHtml = img?`<img src='${img}' alt='' style='max-width:100%;border-radius:8px;margin:10px 0;'>`:'';
+      let where = place==='personal'?'Tài khoản cá nhân':(place==='fanpage'?'Fanpage':(place==='group'?'Nhóm':'Nhiều nhóm'));
+      let schedule = mode==='now'?'<b>Đăng ngay</b>':`<b>Lên lịch:</b> ${datetime?datetime:'(chưa chọn)'}${repeat!=='none'?` - Lặp: ${repeat==='daily'?'Hàng ngày':(repeat==='weekly'?'Hàng tuần':'')}`:''}`;
+      let groupInfo = (place==='group'||place==='multi-group')?`<div><b>Nhóm:</b> ${groups||'(chưa nhập)'}</div>`:'';
+      document.getElementById('gemini-output-box').innerHTML = `<div class='gemini-output'><div class='gemini-output-header'><span>Output AI gợi ý:</span> <button onclick='copyGeminiContent()' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:6px 18px;border-radius:7px;cursor:pointer;'>Sao chép</button> <button onclick='autoPostDemo()' style='background:#ff00cc;color:#fff;font-weight:700;border:none;padding:6px 18px;border-radius:7px;cursor:pointer;margin-left:8px;'>Đăng tự động</button></div>${imgHtml}<pre id='gemini-content' style='background:#232526;color:#ffe53b;padding:16px 14px;border-radius:8px;font-size:1.08em;margin:0 0 8px 0;white-space:pre-line;'>${content}</pre><div style='margin-top:8px;'><b>Nơi đăng:</b> ${where} ${groupInfo} | <b>Chế độ:</b> ${schedule}</div></div>`;
     }
   });
 });
@@ -376,6 +408,10 @@ window.copyGeminiContent = function() {
   const text = document.getElementById('gemini-content').innerText;
   navigator.clipboard.writeText(text);
   alert('Đã sao chép nội dung!');
+}
+
+window.autoPostDemo = function() {
+  alert('Demo: Gọi Facebook API để đăng bài tự động.\nBạn cần xác thực và cấp quyền cho ứng dụng!');
 }
 
 window.renderAIResult = function(type) {
@@ -503,4 +539,14 @@ window.deleteProd = function(idx) {
   const cat = demoCategories.find(c=>c.name===demoProducts[idx].category); if(cat) cat.count--;
   demoProducts.splice(idx,1);
   renderPage('products');
+}
+
+window.toggleGroupInput = function() {
+  const val = document.getElementById('gsp-place').value;
+  document.getElementById('group-input-box').style.display = (val==='group'||val==='multi-group')?'block':'none';
+}
+
+window.toggleScheduleInput = function() {
+  const val = document.getElementById('gsp-mode').value;
+  document.getElementById('schedule-input-box').style.display = (val==='schedule')?'block':'none';
 } 
