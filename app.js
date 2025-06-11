@@ -377,6 +377,10 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     navigate('fbpost');
   };
+  const chatBtn = document.getElementById('chatbot-btn');
+  if(chatBtn) chatBtn.onclick = function() {
+    showChatbotPopup();
+  };
   document.body.addEventListener('submit', function(e) {
     if(e.target && e.target.id==='gemini-form') {
       e.preventDefault();
@@ -400,6 +404,20 @@ document.addEventListener('DOMContentLoaded', () => {
       let schedule = mode==='now'?'<b>Đăng ngay</b>':`<b>Lên lịch:</b> ${datetime?datetime:'(chưa chọn)'}${repeat!=='none'?` - Lặp: ${repeat==='daily'?'Hàng ngày':(repeat==='weekly'?'Hàng tuần':'')}`:''}`;
       let groupInfo = (place==='group'||place==='multi-group')?`<div><b>Nhóm:</b> ${groups||'(chưa nhập)'}</div>`:'';
       document.getElementById('gemini-output-box').innerHTML = `<div class='gemini-output'><div class='gemini-output-header'><span>Output AI gợi ý:</span> <button onclick='copyGeminiContent()' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:6px 18px;border-radius:7px;cursor:pointer;'>Sao chép</button> <button onclick='autoPostDemo()' style='background:#ff00cc;color:#fff;font-weight:700;border:none;padding:6px 18px;border-radius:7px;cursor:pointer;margin-left:8px;'>Đăng tự động</button></div>${imgHtml}<pre id='gemini-content' style='background:#232526;color:#ffe53b;padding:16px 14px;border-radius:8px;font-size:1.08em;margin:0 0 8px 0;white-space:pre-line;'>${content}</pre><div style='margin-top:8px;'><b>Nơi đăng:</b> ${where} ${groupInfo} | <b>Chế độ:</b> ${schedule}</div></div>`;
+    }
+    if(e.target && e.target.id==='chatbot-form') {
+      e.preventDefault();
+      const name = document.getElementById('chatbot-name').value.trim()||'Khách';
+      const msg = document.getElementById('chatbot-msg').value.trim();
+      if(!msg) return alert('Vui lòng nhập nội dung!');
+      const chatBox = document.getElementById('chatbot-chatbox');
+      chatBox.innerHTML += `<div class='chatbot-user'><b>${name}:</b> ${msg}</div>`;
+      setTimeout(()=>{
+        chatBox.innerHTML += `<div class='chatbot-bot'><b>Bot:</b> Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất. (Demo trả lời tự động)</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 600);
+      document.getElementById('chatbot-msg').value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
   });
 });
@@ -549,4 +567,51 @@ window.toggleGroupInput = function() {
 window.toggleScheduleInput = function() {
   const val = document.getElementById('gsp-mode').value;
   document.getElementById('schedule-input-box').style.display = (val==='schedule')?'block':'none';
+}
+
+function showChatbotPopup() {
+  if(document.getElementById('chatbot-popup')) return;
+  const popup = document.createElement('div');
+  popup.id = 'chatbot-popup';
+  popup.innerHTML = `<div class='chatbot-inner'><div class='chatbot-header' id='chatbot-header'><span>💬 Chatbot Liên hệ</span><button onclick='document.getElementById("chatbot-popup").remove()' style='background:none;border:none;color:#00fff7;font-size:1.5rem;cursor:pointer;margin-left:auto;'>×</button></div><div class='chatbot-quick'><button onclick='chatbotQuick("Thông tin shop")'>Thông tin shop</button><button onclick='chatbotQuick("Liên hệ")'>Liên hệ</button><button onclick='chatbotQuick("Sản phẩm hot nhất?")'>Hỏi sản phẩm</button></div><div id='chatbot-chatbox' class='chatbot-chatbox'></div><form id='chatbot-form' style='display:flex;gap:8px;margin-top:10px;'><input id='chatbot-name' type='text' placeholder='Tên của bạn' style='flex:1 1 80px;padding:8px 10px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;'><input id='chatbot-msg' type='text' placeholder='Nhập nội dung...' style='flex:2 1 120px;padding:8px 10px;border-radius:7px;border:2px solid #ff00cc;font-size:1rem;'><button type='submit' style='background:#00fff7;color:#18122B;font-weight:700;border:none;padding:8px 18px;border-radius:8px;cursor:pointer;'>Gửi</button></form></div>`;
+  Object.assign(popup.style, {position:'fixed',bottom:'90px',right:'18px',zIndex:99999});
+  document.body.appendChild(popup);
+  // Kéo di chuyển
+  let isDrag=false, startX=0, startY=0, startLeft=0, startTop=0;
+  const header = document.getElementById('chatbot-header');
+  header.style.cursor = 'move';
+  header.onmousedown = function(e) {
+    isDrag = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    const rect = popup.getBoundingClientRect();
+    startLeft = rect.left;
+    startTop = rect.top;
+    document.body.style.userSelect = 'none';
+  };
+  document.onmousemove = function(e) {
+    if(isDrag) {
+      let left = startLeft + (e.clientX - startX);
+      let top = startTop + (e.clientY - startY);
+      popup.style.left = left+'px';
+      popup.style.top = top+'px';
+      popup.style.right = 'auto';
+      popup.style.bottom = 'auto';
+    }
+  };
+  document.onmouseup = function() { isDrag=false; document.body.style.userSelect=''; };
+}
+window.chatbotQuick = function(msg) {
+  const name = document.getElementById('chatbot-name').value.trim()||'Khách';
+  const chatBox = document.getElementById('chatbot-chatbox');
+  chatBox.innerHTML += `<div class='chatbot-user'><b>${name}:</b> ${msg}</div>`;
+  setTimeout(()=>{
+    let reply = 'Cảm ơn bạn đã liên hệ!';
+    if(msg.includes('shop')) reply = 'Shop ABC - Chuyên thời trang, phụ kiện, giao hàng toàn quốc.';
+    if(msg.includes('Liên hệ')) reply = 'Bạn có thể gọi 0123.456.789 hoặc inbox fanpage để được hỗ trợ.';
+    if(msg.includes('Sản phẩm')) reply = 'Sản phẩm hot: Áo thun nữ siêu mềm, Giày sneaker trắng, Tai nghe Bluetooth.';
+    chatBox.innerHTML += `<div class='chatbot-bot'><b>Bot:</b> ${reply}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 600);
+  chatBox.scrollTop = chatBox.scrollHeight;
 } 
