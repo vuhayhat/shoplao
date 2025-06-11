@@ -216,9 +216,15 @@ function renderPage(page) {
     }
   }
   if(page === 'ai') {
-    html += `<div class='ai-demo' style='display:flex;gap:24px;align-items:center;margin-top:24px;'>
-      <img src='${demoProducts[0].img}' style='width:160px;height:120px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px #0001;'>
-      <div><b>Mô tả AI gợi ý:</b><br><em>Áo thun nam basic, chất liệu cotton thoáng mát, phù hợp mọi hoạt động hàng ngày. Màu sắc trẻ trung, dễ phối đồ.</em><br><button style='margin-top:10px;padding:6px 16px;background:#43a047;color:#fff;border:none;border-radius:4px;cursor:pointer;'>Phân tích sản phẩm khác</button></div>
+    html += `<div class='ai-analyze-box' style='margin-top:24px;'>
+      <h3 style='font-family:Orbitron,Arial,sans-serif;font-size:1.3rem;color:#00fff7;text-shadow:0 0 8px #ff00cc;'>Chọn loại phân tích AI</h3>
+      <div style='display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px;'>
+        <button class='ai-btn' onclick='renderAIResult("product")'>Phân tích mặt hàng kinh doanh</button>
+        <button class='ai-btn' onclick='renderAIResult("trend")'>Phân tích xu hướng</button>
+        <button class='ai-btn' onclick='renderAIResult("location")'>Phân tích địa điểm kinh doanh</button>
+        <button class='ai-btn' onclick='renderAIResult("market")'>Phân tích thị trường</button>
+      </div>
+      <div id='ai-result-box'></div>
     </div>`;
   }
   if(page === 'statistic') {
@@ -279,4 +285,37 @@ function showOrderDetail(orderId) {
 // Khởi tạo trang đầu tiên
 document.addEventListener('DOMContentLoaded', () => {
   renderPage(currentPage);
-}); 
+});
+
+window.renderAIResult = function(type) {
+  let html = '';
+  if(type==="product") {
+    html = `<div class='ai-result'><h4>🔎 Phân tích mặt hàng kinh doanh</h4><p>AI đề xuất: <b>Thời trang trẻ, phụ kiện công nghệ, đồ gia dụng thông minh</b> là các mặt hàng tiềm năng tại khu vực bạn chọn.</p></div>`;
+  } else if(type==="trend") {
+    html = `<div class='ai-result'><h4>📈 Phân tích xu hướng</h4><p>Xu hướng nổi bật: <b>Mua sắm online qua mạng xã hội, livestream bán hàng, sản phẩm xanh - thân thiện môi trường</b>.</p></div>`;
+  } else if(type==="location") {
+    html = `<div class='ai-result'><h4>📍 Phân tích địa điểm kinh doanh</h4><label>Chọn địa điểm: <select id='ai-location' onchange='window.renderAIResultLocation()'>
+      <option value='hanoi'>Hà Nội</option>
+      <option value='hochiminh'>Hồ Chí Minh</option>
+      <option value='danang'>Đà Nẵng</option>
+      <option value='vientiane'>Viêng Chăn</option>
+      <option value='savannakhet'>Savannakhet</option>
+    </select></label>
+    <div id='ai-location-result'></div></div>`;
+    setTimeout(()=>window.renderAIResultLocation(), 100);
+  } else if(type==="market") {
+    html = `<div class='ai-result'><h4>🛒 Phân tích thị trường</h4><p>AI nhận định: <b>Thị trường TMĐT Đông Nam Á tăng trưởng mạnh, khách hàng trẻ chiếm đa số, nhu cầu sản phẩm công nghệ, thời trang, làm đẹp tăng cao.</b></p></div>`;
+  }
+  document.getElementById('ai-result-box').innerHTML = html;
+}
+
+window.renderAIResultLocation = function() {
+  const val = document.getElementById('ai-location').value;
+  let result = '';
+  if(val==='hanoi') result = 'Hà Nội: Khu vực đông dân, sức mua lớn, phù hợp kinh doanh thời trang, đồ gia dụng, đồ ăn nhanh.';
+  if(val==='hochiminh') result = 'Hồ Chí Minh: Trung tâm kinh tế, khách hàng trẻ, thích hợp sản phẩm công nghệ, phụ kiện, dịch vụ nhanh.';
+  if(val==='danang') result = 'Đà Nẵng: Du lịch phát triển, nên kinh doanh đặc sản, quà lưu niệm, dịch vụ du lịch.';
+  if(val==='vientiane') result = 'Viêng Chăn: Thị trường mới nổi, nhu cầu hàng tiêu dùng, thời trang, điện tử tăng.';
+  if(val==='savannakhet') result = 'Savannakhet: Kinh doanh thực phẩm, hàng tiêu dùng, dịch vụ vận chuyển phù hợp.';
+  document.getElementById('ai-location-result').innerHTML = `<p>${result}</p>`;
+} 
